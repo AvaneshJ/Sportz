@@ -7,6 +7,7 @@ import { matches } from "../db/schema.js";
 import { db } from "../db/db.js";
 import { getMatchStatus } from "../utils/match-status.js";
 import { desc } from "drizzle-orm";
+import { parse } from "zod";
 
 export const matchRouter = new Router();
 const MAX_LIMIT = 100;
@@ -15,7 +16,7 @@ matchRouter.get("/", async (req, res) => {
   if (!parsed.success) {
     return res.status(400).json({
       error: "Invalid query parameters",
-      details: JSON.stringify(parsed.error),
+      details: parsed.error.issues,
     });
   }
   const limit = Math.min(parsed.data.limit ?? 50, MAX_LIMIT);
@@ -29,7 +30,7 @@ matchRouter.get("/", async (req, res) => {
   } catch (error) {
     res.status(500).json({
       error: "Failed to fetch matches",
-      details: JSON.stringify(error),
+      details: parsed.error.issues,
     });
   }
 });
@@ -38,7 +39,7 @@ matchRouter.post("/", async (req, res) => {
   if (!parsed.success) {
     res.status(400).json({
       error: "Invalid payload",
-      details: JSON.stringify(parsed.error),
+      details: parsed.error.issues,
     });
   }
   const {
@@ -60,7 +61,7 @@ matchRouter.post("/", async (req, res) => {
   } catch (error) {
     res.status(500).json({
       error: "Failed to create match",
-      details: JSON.stringify(error),
+      details: parsed.error.issues,
     });
   }
 });
