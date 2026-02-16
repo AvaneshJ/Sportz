@@ -9,11 +9,13 @@ function sendJson(socket, payload) {
 }
 
 function broadcast(wss, payload) {
+  const message = JSON.stringify(payload);
   for (const client of wss.clients) {
     if (client.readyState === WebSocket.OPEN) {
       client.send(JSON.stringify(payload));
     } else {
       return;
+      client.send(message);
     }
   }
 }
