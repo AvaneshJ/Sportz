@@ -3,7 +3,7 @@ import arcjet, { detectBot, shield, slidingWindow } from "@arcjet/node";
 const arcjet_key = process.env.ARCJET_KEY;
 const arcjet_mode = process.env.ARCJET_MODE === "DRY_RUN" ? "DRY_RUN" : "LIVE";
 if (!arcjet_key) {
-  throw new Error("ARCJET_KEY is not set in environment variables");
+  console.warn("ARCJET_KEY is not set in environment variables");
 }
 
 export const httpArcjet = arcjet_key
