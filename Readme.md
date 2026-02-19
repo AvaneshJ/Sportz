@@ -37,10 +37,10 @@ A high-performance, real-time sports updates server built with **Node.js**, **We
 
 Create a `.env` file in the root directory:
 
-```env
+````env
 DATABASE_URL=postgres://user:password@localhost:5432/sportz
 ARCJET_KEY=aj_your_key_here
-PORT=8000
+PORT=8000```
 
 ### 3. Installation and Dependencies
 
@@ -72,4 +72,4 @@ Health Checks: Prunes inactive "zombie" connections every 30 seconds.
 
 📜 License
 MIT
-```
+````
