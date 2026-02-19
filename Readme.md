@@ -42,3 +42,39 @@ DATABASE_URL=postgres://user:password@localhost:5432/sportz
 ARCJET_KEY=your_key_here
 PORT=8000
 ```
+
+### 3. Installation & Database
+
+```Bash
+
+npm install
+npx drizzle-kit push
+```
+
+## 🔌 WebSocket API
+
+Endpoint: ws://localhost:8000/ws
+
+Client Actions
+Subscribe: {"type": "subscribe", "matchId": 101}
+
+Unsubscribe: {"type": "unsubscribe", "matchId": 101}
+
+Server Events
+matchCreated: Sent to all clients when a new match is added.
+
+commentaryUpdate: Sent only to clients subscribed to that specific matchId.
+
+## 🛡️ Security
+
+This project uses Arcjet for connection security:
+
+Rate Limiting: Prevents single IPs from flooding the server.
+
+Bot Protection: Blocks automated scrapers.
+
+Health Checks: Prunes inactive "zombie" connections every 30 seconds.
+
+## 📜 License
+
+MIT
